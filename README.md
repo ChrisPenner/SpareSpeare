@@ -1,0 +1,4 @@
+SpareSpeare
+===========
+
+Shakespeare Text Generator
