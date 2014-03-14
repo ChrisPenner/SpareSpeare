@@ -4,10 +4,10 @@ SpareSpeare is a Lorem ipsum style Shakespeare filler text generator written in 
 
 It contains a large library of lines from the complete works of shakespeare.
 
-Simply ask for a certain amount of lines, sparespeare will deliver, useful for projects in which filler text is needed.
+Simply ask for a certain amount of lines or words, sparespeare will deliver, useful for projects in which filler text is needed.
 
 #Usage
-Import the module, then call getLines()
+Import the module, then call getLines(#) or getWords(#)
 
 ```
 Python 3:
@@ -18,12 +18,17 @@ Python 3:
 And your courtesy, for a ring-carrier!
 The troop is past. Come, pilgrim, I will bring you
 Where you shall host. Of enjoin'd penitents
+
+>>> sparespeare.getWords(10)
+'A joyless, dismal, black, and sorrowful issue! Here is the'
+
 ```
 
 Keyword options (default)  include:
 
 * returnList (False) : returns lines as a python list instead of a string.
 * listSpeaker (False) : prints the speaker of the line before the line itself
+* newLine (True) : adds newline to end of each line
 
 Use caution with listSpeaker, as it's not perfect at guessing and sometimes inserts strange heading artifacts, e.g. "ACT III. ......"
 
@@ -34,6 +39,9 @@ Use caution with listSpeaker, as it's not perfect at guessing and sometimes inse
 LENNOX. For Fleance fled. Men must not walk too late.
 LENNOX. Who cannot want the thought, how monstrous
 LENNOX. It was for Malcolm and for Donalbain
+>>> sparespeare.getLines(3, newLine=False)
+'You do him wrong, surely. Sir, I was an inward of his. A shy fellow was the Duke; and I believe I know the cause of his withdrawing.'
+
 ```
 
 #MISC
