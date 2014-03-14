@@ -1,16 +1,16 @@
 SpareSpeare
 ===========
------------
-Lorem ipsum style Shakespeare Text Generator,
+SpareSpeare is a Lorem ipsum style Shakespeare filler text generator written in Python 3. Lorem ipsum is old news.
 
-Contains a large library of lines from the complete works of shakespeare
-simply ask for a certain amount of lines.
+It contains a large library of lines from the complete works of shakespeare.
+
+Simply ask for a certain amount of lines, sparespeare will deliver, useful for projects in which filler text is needed.
 
 #Usage
-------
 Import the module, then call getLines()
 
-```python
+```
+Python 3:
 >>> import sparespeare
 >>> sparespeare.getLines(3)
 'Canst thou not minister to a mind diseased,\nPluck from the memory a rooted sorrow,\nRaze out the written troubles of the brain,'
@@ -36,3 +36,8 @@ LENNOX. Who cannot want the thought, how monstrous
 LENNOX. It was for Malcolm and for Donalbain
 ```
 
+#MISC
+Only **sparespeare.py** and **lines.pkl** are necessary for proper usage.
+
+* **complete_works.txt** is included for reference and copyright information
+* **lineparser.py** is the script used to generate the database, though it's so specialized it likely won't be useful for much else.
