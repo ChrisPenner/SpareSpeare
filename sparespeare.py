@@ -29,3 +29,19 @@ def getLines(amount, returnList=False, listSpeaker=False):
     else:
         result = result[:-1]
     return result
+
+def getWords(amount, returnList=False):
+    """
+    Extracts amount of words from list of lines
+    """
+    # Start at a random index
+    i = random.randint(0, len(lines) - 1)
+    result = []
+    while len(result) < amount:
+        result.extend(lines[i][1].split(' '))
+        i = (i + 1) % len(lines)
+    result = result[:amount]
+    if returnList:
+        return result
+    else:
+        return ' '.join(result)

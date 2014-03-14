@@ -6,6 +6,7 @@ import pickle
 # pattern = r'^(\s{6,}.+$|((((?P<speaker>[A-Z\s]{2,}\.)|\s+))\s+(?P<stanza>.+?[a-z](\s{0,2}[^\s]+)+)((\s{3,})*.*)?))$'
 # Regex pattern magic to extract files from Project Gutenberg file.
 pattern = r'^((?P<scrap>\s{6,}.+$)|((((?P<speaker>[A-Z\s]{2,}\.)|\s+))\s+(?P<scrap2>([A-Z]\s*){3,}\,.+)?(?P<stanza>.+?[a-z](\s{0,2}[^\s]+)+)?((\s{3,})*.*)?))$'
+secondaryPattern = r'^.+((\[.+?\]).*)*$'
 
 # Empty list to store lines
 linesList = []
@@ -17,15 +18,21 @@ with open('complete_works.txt') as f:
         # run regex and generate 'match' object
         match = prog.match(line)
         # if matches are found, add them to the list
-        if prog.match(line) is not None:
+        if match is not None:
             d = match.groupdict()
-            if d['stanza'] is not None:
+            stanza = d['stanza']
+            if stanza is not None:
+                # If stanza exists, crop out any stage directions in steps:
+                stanza = re.sub(r'(\[.*?\]\s*)', '', stanza)
+                stanza = re.sub(r'(\[.*)|(\s*.*?\]\s*)', '', stanza)
+
+                # stanza = re.sub(r'(\s*\[.*?\]\s*)|(\s*\[.*)|(\s*.*?\]\s*)', ' ', stanza)
                 if d['speaker'] is not None:
                     speaker = d['speaker']
                 # Adds lines to the list as a tuple: (speaker, stanza)
-                linesList.append((speaker.strip(), d['stanza'].strip()))
+                linesList.append((speaker.strip(), stanza.strip()))
                 # Prints lines (for testing):
-                # print(d['stanza'])
+                print(stanza)
 
         # This code runs the opposite, it displays all removed text:
         # if prog.match(line) is not None:
@@ -34,5 +41,5 @@ with open('complete_works.txt') as f:
         #         print(d['scrap'], d['scrap2'])
 
 # Write generated line list to file 'lines.pkl'
-with open('lines.pkl','wb') as f:
+with open('lines.pkl', 'wb') as f:
     pickle.dump(linesList, f)
